@@ -43,3 +43,11 @@ class QuizType(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class QuestionType(models.Model):
+    """Type to be used for a question"""
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name

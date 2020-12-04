@@ -52,3 +52,11 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(quiztype), quiztype.name)
+
+    def test_questiontype_str(self):
+        """Test the questiontype string representation"""
+        questiontype = models.QuestionType.objects.create(
+            name='Multiple'
+        )
+
+        self.assertEqual(str(questiontype), questiontype.name)

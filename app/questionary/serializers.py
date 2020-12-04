@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.models import QuizType
+from core.models import QuizType, QuestionType
 
 
 class QuizTypeSerializer(serializers.ModelSerializer):
@@ -12,4 +12,10 @@ class QuizTypeSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 
+class QuestionTypeSerializer(serializers.ModelSerializer):
+    """Serializer for questiontype abjects"""
 
+    class Meta:
+        model = QuestionType
+        fields = ('id', 'name')
+        read_only = ('id',)

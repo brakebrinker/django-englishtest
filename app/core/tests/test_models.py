@@ -44,3 +44,11 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_quiztype_str(self):
+        """Test the quiztype string representation"""
+        quiztype = models.QuizType.objects.create(
+            name='Course'
+        )
+
+        self.assertEqual(str(quiztype), quiztype.name)

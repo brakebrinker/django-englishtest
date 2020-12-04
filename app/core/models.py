@@ -35,3 +35,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class QuizType(models.Model):
+    """ Type to be used for a quiz """
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name

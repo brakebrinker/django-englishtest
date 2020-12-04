@@ -1,9 +1,5 @@
 FROM python:3.8.6-alpine
 
-EXPOSE 8000
-
-ENV PYTHONWRITEBYTECODE=1
-
 ENV PYTHONUNBUFFERED=1
 
 ADD requirements.txt .
@@ -21,5 +17,3 @@ RUN mkdir -p /vol/web/static
 
 RUN adduser -D user && chown -R user:user /vol/ && chmod -R 755 /vol/web
 USER user
-
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app.wsgi"]

@@ -1,0 +1,8 @@
+- model: core.quiztype
+  pk: 1
+  fields:
+    name: 'Level test'
+- model: core.quiztype
+  pk: 2
+  fields:
+    name: 'Course test'

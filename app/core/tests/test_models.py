@@ -6,6 +6,11 @@ from django.contrib.auth import get_user_model
 from core import models
 
 
+def sample_user(email='test@englishtes.com', password='testpass'):
+    """Create a sample user"""
+    return get_user_model().objects.create_user(email, password)
+
+
 class ModelTests(TestCase):
 
     def test_create_user_with_email_successful(self):
@@ -60,3 +65,17 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(questiontype), questiontype.name)
+
+    def test_question_str(self):
+        """Test the question string representation"""
+        question_type = models.QuestionType.objects.create(name='Match')
+        question = models.Question.objects.create(
+            user=sample_user(),
+            title='Match cases',
+            description='Try to match the following phrases',
+            scores=4,
+            duration_minutes=5,
+            type=question_type
+        )
+
+        self.assertEqual(str(question), question.title)

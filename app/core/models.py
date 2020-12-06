@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
 
@@ -51,3 +53,26 @@ class QuestionType(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Question(models.Model):
+    """Question object"""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    scores = models.PositiveIntegerField(
+        validators=[MinValueValidator(1)]
+    )
+    duration_minutes = models.PositiveIntegerField(
+        validators=[MinValueValidator(1)]
+    )
+    type = models.ForeignKey(
+        QuestionType,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.title

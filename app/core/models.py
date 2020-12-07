@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
@@ -73,6 +74,29 @@ class Question(models.Model):
         QuestionType,
         on_delete=models.CASCADE
     )
+
+    def __str__(self):
+        return self.title
+
+
+class Quiz(models.Model):
+    """Quiz object"""
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    published = models.BooleanField(default=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='author_article_set'
+    )
+    modified_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='editor_article_set'
+    )
+    questions = models.ManyToManyField('Question')
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title

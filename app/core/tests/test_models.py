@@ -79,3 +79,16 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(question), question.title)
+
+    def test_quiz_str(self):
+        """Test the quiz string representation"""
+        user = sample_user()
+        quiz = models.Quiz.objects.create(
+            title='Level up test quiz',
+            description='To up your level you should pass the test',
+            published=True,
+            created_by=user,
+            modified_by=user
+        )
+
+        self.assertEqual(str(quiz), quiz.title)

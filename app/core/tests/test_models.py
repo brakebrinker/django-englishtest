@@ -1,5 +1,3 @@
-from unittest.mock import patch
-
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
@@ -92,3 +90,22 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(quiz), quiz.title)
+
+    def test_answer_str(self):
+        """Test the answer string representation"""
+        question_type = models.QuestionType.objects.create(name='Word order')
+        question = models.Question.objects.create(
+            user=sample_user(),
+            title='Word order',
+            description='Try to make correct word order',
+            scores=4,
+            duration_minutes=5,
+            type=question_type
+        )
+        answer = models.Answer.objects.create(
+            initial='Word order wrong',
+            target='Wrong word order',
+            question=question
+        )
+
+        self.assertEqual(str(answer), answer.target)

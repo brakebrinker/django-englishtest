@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.utils import timezone
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
@@ -102,3 +101,16 @@ class Quiz(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Answer(models.Model):
+    """Answer object"""
+    initial = models.CharField(max_length=255)
+    target = models.CharField(max_length=255)
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.target

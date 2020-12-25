@@ -7,6 +7,7 @@ from questionary import views
 router = DefaultRouter()
 router.register('quiz-types', views.QuizTypeViewSet)
 router.register('question-types', views.QuestionTypeViewSet)
+router.register('quizzes', views.QuizViewSet)
 
 app_name = 'questionary'
 

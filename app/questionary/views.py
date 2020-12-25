@@ -2,7 +2,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from core.models import QuizType, QuestionType
+from core.models import QuizType, QuestionType, Quiz
 
 from questionary import serializers
 
@@ -28,3 +28,8 @@ class QuestionTypeViewSet(BaseQuestionaryAttrViewSet):
     """Manage questiontype in database"""
     queryset = QuestionType.objects.all()
     serializer_class = serializers.QuestionTypeSerializer
+
+class QuizViewSet(BaseQuestionaryAttrViewSet):
+    """Manage quiz in database"""
+    queryset = Quiz.objects.all()
+    serializer_class = serializers.QuizSerializer

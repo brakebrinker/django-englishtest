@@ -114,3 +114,18 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.target
+
+
+class Assignment(models.Model):
+    """Assignment abject"""
+    is_sent = models.BooleanField(default=False)
+    quiz = models.ForeignKey(
+        Quiz,
+        on_delete=models.CASCADE
+    )
+    users = models.ManyToManyField('User')
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.quiz.title

@@ -9,6 +9,22 @@ def sample_user(email='test@englishtes.com', password='testpass'):
     return get_user_model().objects.create_user(email, password)
 
 
+def sample_quiz():
+    """Create a sample quiz"""
+    user = get_user_model().objects.create_superuser(
+        'test@englishtest.com',
+        'test123'
+    )
+
+    return models.Quiz.objects.create(
+        title='Level up test quiz',
+        description='To up your level you should pass the test',
+        published=True,
+        created_by=user,
+        modified_by=user
+    )
+
+
 class ModelTests(TestCase):
 
     def test_create_user_with_email_successful(self):
@@ -109,3 +125,12 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(answer), answer.target)
+
+    def test_assignment_str(self):
+        """Test the assignment string representation"""
+        assignment = models.Assignment.objects.create(
+            quiz=sample_quiz(),
+            is_sent=True
+        )
+
+        self.assertEqual(str(assignment), assignment.quiz.title)
